@@ -193,7 +193,7 @@ export function ContactForm({ problem, doctor }: ContactFormProps) {
                     </div>
                   </Link>
                 )}
-                {website && (
+                {website && website[0] && (
                   <Link
                     href={website[0].value}
                     target="_blank"

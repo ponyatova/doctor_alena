@@ -3,6 +3,7 @@ import { ClinicLocations } from "@/components/lending/ClinicLocations";
 import { getDoctorById, getProblems } from "@/lib/db";
 import { LuPhone, LuMail } from "react-icons/lu";
 import { RevealSection } from "@/components/lending/RevealSection";
+import Link from "next/link";
 
 export default async function ContactsPage() {
   const [doctor, problems] = await Promise.all([
@@ -51,7 +52,7 @@ export default async function ContactsPage() {
                 )}
 
                 {emailContact && (
-                  <a
+                  <Link
                     href={`mailto:${emailContact.value}`}
                     className="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group"
                   >
@@ -64,7 +65,7 @@ export default async function ContactsPage() {
                         {emailContact.value}
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
