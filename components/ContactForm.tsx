@@ -27,6 +27,7 @@ export function ContactForm({ problem, doctor }: ContactFormProps) {
   } | null>(null);
   const [isPending, startTransition] = useTransition();
   const [consentAgreed, setConsentAgreed] = useState(false);
+  if (!doctor) return null;
   const email = doctor.contacts?.filter((item) => item.type === "email");
 
   const website =
@@ -376,11 +377,13 @@ export function ContactForm({ problem, doctor }: ContactFormProps) {
                       className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition-all disabled:opacity-50"
                     >
                       <option value="">Выберите направление</option>
-                      {problem.map((problem) => (
-                        <option key={problem.id} value={problem.title}>
-                          {problem.title}
-                        </option>
-                      ))}
+                      {problem &&
+                        problem.length > 0 &&
+                        problem.map((problem) => (
+                          <option key={problem.id} value={problem.title}>
+                            {problem.title}
+                          </option>
+                        ))}
                     </select>
                   </div>
 
