@@ -36,9 +36,9 @@ export default function DoctorContacts({
               ]}
             />
 
-            <AdminInput name="value" defaultValue="" />
+            <AdminInput name="label" defaultValue="Название" />
+            <AdminInput name="value" defaultValue="Ссылка" />
 
-            <AdminInput name="label" defaultValue="" />
           </div>
         </AdminForm>
       </div>
@@ -59,12 +59,12 @@ export default function DoctorContacts({
               ]}
             />
 
-            <AdminInput name={`contacts[${i}][value]`} defaultValue={c.value} />
 
             <AdminInput
               name={`contacts[${i}][label]`}
-              defaultValue={c.label || ""}
+              defaultValue={c.label || "Название"}
             />
+            <AdminInput name={`contacts[${i}][value]`} defaultValue={c.value || 'Ссылка'} />
 
             <AdminDeleteButton action={deleteDoctorContact} id={c.id} />
           </div>
