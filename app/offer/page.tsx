@@ -2,6 +2,6 @@ import ClientPageOffer from "./ClientPageOffer";
 
 export default async function OfferPage() {
   const url = "https://dr-prokhurovskaya.vercel.app";
-  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "";
+  const email = "Helenasmu@gmail.com";
   return <ClientPageOffer url={url} email={email} />;
 }
