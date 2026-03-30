@@ -1,3 +1,4 @@
+"use server";
 import { AdminForm } from "@/components/admin/AdminForm";
 import { AdminInput } from "@/components/admin/AdminInput";
 import { AdminDeleteButton } from "@/components/admin/AdminDeleteButton";
@@ -12,20 +13,21 @@ import {
 import { DoctorSchedule } from "@/lib/types";
 
 const days = [
-  { value: "1", label: "Понедельник" },
-  { value: "2", label: "Вторник" },
-  { value: "3", label: "Среда" },
-  { value: "4", label: "Четверг" },
-  { value: "5", label: "Пятница" },
-  { value: "6", label: "Суббота" },
-  { value: "7", label: "Воскресенье" },
+  { value: "0", label: "Понедельник" },
+  { value: "1", label: "Вторник" },
+  { value: "2", label: "Среда" },
+  { value: "3", label: "Четверг" },
+  { value: "4", label: "Пятница" },
+  { value: "5", label: "Суббота" },
+  { value: "6", label: "Воскресенье" },
 ];
 
-export default function DoctorScheduleTab({
+export default async function DoctorScheduleTab({
   schedule,
 }: {
   schedule: DoctorSchedule[];
 }) {
+  console.log("DoctorScheduleTab rendered", schedule);
   return (
     <div className="overflow-x-hidden flex flex-col gap-2">
       {/* ADD */}
@@ -50,27 +52,29 @@ export default function DoctorScheduleTab({
         </AdminForm>
       </div>
 
-      {/* LIST */}
       {schedule.map((s, i) => (
-        <AdminForm action={upsertDoctorSchedules} key={s.id}>
+        <AdminForm
+          action={upsertDoctorSchedules}
+          key={`${s.id}-${s.updated_at}`}
+        >
           <div className="border p-4 rounded space-y-2 w-full min-w-0">
-            <AdminHidden name={`schedule[${i}][id]`} value={s.id} />
+            <AdminHidden name="id" value={s.id} />
 
             <AdminSelect
-              name={`schedule[${i}][day_of_week]`}
+              name="day_of_week"
               label="День недели"
               options={days}
               defaultValue={String(s.day_of_week)}
             />
 
             <AdminInput
-              name={`schedule[${i}][start_time]`}
+              name="start_time"
               defaultValue={s.start_time || ""}
               type="time"
             />
 
             <AdminInput
-              name={`schedule[${i}][end_time]`}
+              name="end_time"
               defaultValue={s.end_time || ""}
               type="time"
             />
